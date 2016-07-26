@@ -26,6 +26,7 @@ get '/search' do
 
   response = HTTParty.get(queryUrl(query, amount))
   payload = response.parsed_response.to_json
+  payload = JSON.pretty_generate(response.parsed_response)
 
   # Write the response to disk for further testing
   File.open("#{tmpDirectory}/#{query}.#{amount}.txt", 'w') { |file| file.write(payload) }
