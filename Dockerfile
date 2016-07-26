@@ -11,7 +11,7 @@ RUN apt-get clean
 RUN gem update --system
 RUN gem install bundler
 
-RUN git clone https://github.com/tcnksm/docker-sinatra /root/sinatra
+RUN git clone https://github.com/scanf/Clipart-api /root/sinatra
 RUN cd /root/sinatra; bundle install
 
 EXPOSE 4567
