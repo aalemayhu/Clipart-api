@@ -1,8 +1,11 @@
 # ClipartApp
 require 'sinatra'
 
-class ClipartApp < Sinatra::Base
-  get '/' do
-    "`git tag --describe`"
-  end
+get '/' do
+  version = `git describe --tags` 
+  "#{version}"
+end
+
+get '/search' do
+  "search"
 end
