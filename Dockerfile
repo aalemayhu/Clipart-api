@@ -1,5 +1,5 @@
 FROM ubuntu
-
+# Copied from: https://github.com/tcnksm-sample/docker-sinatra
 MAINTAINER scanf "https://github.com/scanf"
 
 # Install packages for building ruby
