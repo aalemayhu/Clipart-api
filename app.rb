@@ -1,4 +1,3 @@
-# ClipartApp
 require 'sinatra'
 
 get '/' do
