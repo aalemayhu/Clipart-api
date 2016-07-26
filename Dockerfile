@@ -5,7 +5,7 @@ MAINTAINER scanf "https://github.com/scanf"
 # Install packages for building ruby
 RUN apt-get update
 RUN apt-get install -y --force-yes build-essential wget git ruby
-RUN apt-get install -y --force-yes zlib1g-dev libssl-dev libreadline-dev libyaml-dev libxml2-dev libxslt-dev
+RUN apt-get install -y --force-yes zlib1g-dev libssl-dev libreadline-dev libyaml-dev libxml2-dev libxslt-dev ruby-dev
 RUN apt-get clean
 
 RUN gem update --system
