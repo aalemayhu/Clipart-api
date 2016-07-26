@@ -1,2 +1,4 @@
-require './app'
-run ClipartApp
+$:.unshift(File.dirname(__FILE__))
+
+require 'app'
+run App

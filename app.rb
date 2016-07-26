@@ -2,34 +2,38 @@ require 'sinatra'
 require 'httparty'
 require 'json'
 
-# For testing purposes let's persist all responses
-tmpDirectory = "/tmp/requests-clipart"
-`mkdir -p #{tmpDirectory}`
+require 'sinatra/base'
 
-# Make it easy to know what's running on the server
-get '/' do
-  version = `git describe --tags` 
-  "#{version}"
-end
+class App < Sinatra::Base
+  # For testing purposes let's persist all responses
+  tmpDirectory = "/tmp/requests-clipart"
+  `mkdir -p #{tmpDirectory}`
 
-# Use the parameters to build the payload resource
-def queryUrl(query, amount)
-  "https://openclipart.org/search/json/?query=#{query}&amount=#{amount}"
-end
+  # Make it easy to know what's running on the server
+  get '/' do
+    version = `git describe --tags` 
+    "#{version}"
+  end
 
-get '/search' do
-  # The caller is expecting a json paylod
-  content_type :json
+  # Use the parameters to build the payload resource
+  def queryUrl(query, amount)
+    "https://openclipart.org/search/json/?query=#{query}&amount=#{amount}"
+  end
 
-  query = params['query'] || "play"
-  amount = params['amount'] || "20"
+  get '/search' do
+    # The caller is expecting a json paylod
+    content_type :json
 
-  response = HTTParty.get(queryUrl(query, amount))
-  payload = response.parsed_response.to_json
-  payload = JSON.pretty_generate(response.parsed_response)
+    query = params['query'] || "play"
+    amount = params['amount'] || "20"
 
-  # Write the response to disk for further testing
-  File.open("#{tmpDirectory}/#{query}.#{amount}.txt", 'w') { |file| file.write(payload) }
+    response = HTTParty.get(queryUrl(query, amount))
+    payload = response.parsed_response.to_json
+    payload = JSON.pretty_generate(response.parsed_response)
 
-  payload
+    # Write the response to disk for further testing
+    File.open("#{tmpDirectory}/#{query}.#{amount}.txt", 'w') { |file| file.write(payload) }
+
+    payload
+  end
 end
