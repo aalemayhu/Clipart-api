@@ -27,6 +27,7 @@ class App < Sinatra::Base
     images.each { |image| 
       if image.end_with?(".png")
         hashed = Digest::SHA1.hexdigest "#{image}"
+        puts "will download #{image} to /tmp/#{hashed}"
         downloadImage = open("#{image}")
         IO.copy_stream(downloadImage, "/tmp/#{hashed}.png")
       end
