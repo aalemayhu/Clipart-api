@@ -25,7 +25,7 @@ class App < Sinatra::Base
   def extractImages(payload)
     images = URI.extract(payload)
     images.each { |image| 
-      if image.ends_with?(".png")
+      if image.end_with?(".png")
         hashed = Digest::SHA1.hexdigest "#{image}"
         downloadImage = open("#{image}")
         IO.copy_stream(downloadImage, "#{tmpDirectory}/#{hashed}.png")
