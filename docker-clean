@@ -1,2 +1,4 @@
+set -e
+docker stop `docker ps -a | grep -v CONTAINER | awk ' { print $1 } '`
 docker rm `docker ps -a | grep -v CONTAINER | awk ' { print $1 } '`
 docker rmi sinatra
