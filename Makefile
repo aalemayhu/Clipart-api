@@ -4,7 +4,7 @@ all:
 build-docker:
 	docker build -t sinatra .
 
-run-docker: clean build-docker
+run-docker: build-docker
 	docker run -p 4567:4567 -d sinatra
 
 clean:
