@@ -35,7 +35,6 @@ class App < Sinatra::Base
     # Write the response to disk for further testing
     File.open("#{tmpDirectory}/#{query}.#{amount}.txt", 'w') { |file| file.write(payload) }
 
-    puts "payload: #{URI.extract(payload)}"
-    payload
+    "payload: #{URI.extract(payload)}"
   end
 end
